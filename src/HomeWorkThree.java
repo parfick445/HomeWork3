@@ -14,9 +14,9 @@ public class HomeWorkThree {
     }
 
     public static void method() {
-        byte randomNumber = (byte) (Math.random() * 9);
+        var randomNumber = (byte) (Math.random() * 9);
         System.out.println("У вас есть 3 попытки, угадайте число от 0 до 9");
-        for (int i = 1; i <= 3; i++) {
+        for (var i = 1; i <= 3; i++) {
             System.out.println("\nПопытка " + i);
             if (!scanner.hasNextByte()) {
                 i--;
@@ -24,8 +24,11 @@ public class HomeWorkThree {
                 scanner.nextLine();
                 continue;
             }
-            byte enterNumber = scanner.nextByte();
-            if (i == 3 && enterNumber != randomNumber) System.err.println("Вы проиграли");
+            var enterNumber = scanner.nextByte();
+            if (enterNumber < 0 || enterNumber > 9) {
+                i--;
+                System.err.print("Вводите числа от 0 до 9");
+            } else if (i == 3 && enterNumber != randomNumber) System.err.println("Вы проиграли");
             else if (enterNumber == randomNumber) {
                 System.out.println("Вы угадали");
                 break;
@@ -49,10 +52,10 @@ public class HomeWorkThree {
                 "broccoli", "carrot", "cherry", "garlic", "grape", "melon", "leak",
                 "kiwi", "mango", "mushroom", "nut", "olive", "pea", "peanut", "pear",
                 "pepper", "pineapple", "pumpkin", "potato"};
-        int a = (int) (Math.random() * 24);
+        var a = (int) (Math.random() * 24);
         String randomWord = words[a];
         System.out.print("Угадайте загаданное слово \n\nСлова: ");
-        for (int i = 0; i < words.length; i++) {
+        for (var i = 0; i < words.length; i++) {
             if (i % 5 == 0 && i != 0) System.out.println();
             if (i == words.length - 1) System.out.printf("%s.", words[i]);
             else System.out.printf("%s, ", words[i]);
@@ -65,7 +68,7 @@ public class HomeWorkThree {
                 break;
             } else {
                 String grid = "###############";
-                for (int i = 0; i < grid.length(); i++) {
+                for (var i = 0; i < grid.length(); i++) {
                     char oneGrid = grid.charAt(i);
                     if (i < enterWord.length() && i < randomWord.length() && randomWord.charAt(i) == enterWord.charAt(i)) {
                         oneGrid = randomWord.charAt(i);
